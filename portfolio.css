@@ -1,0 +1,83 @@
+/*
+Shoutout to Mr. ChatGPT for helping out
+with some of the css, especially with grid
+since I never used grids before
+*/
+
+.main, .secondary {
+    border-radius: var(--default-radius);
+    white-space: nowrap;
+}
+
+.portfolio-grid {
+    display: grid;
+    gap: var(--grid-gap);
+}
+
+/* Primarily mobile */ @media (orientation: portrait) {
+    .portfolio-grid {
+        grid-template-columns: repeat(1, 1fr); /* mobile has single column */
+    }
+} /*Primarily desktop */ @media (orientation: landscape) {
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr); /* desktop has two column */
+    }
+}
+
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: var(--main-aspect-ratio);
+    transition: transform var(--transition-duration);
+} .portfolio-item.secondary {
+    aspect-ratio: var(--secondary-aspect-ratio);
+}
+
+#portfolio {
+    margin-top: calc(var(--base-padding) * 2);
+    margin-bottom: calc(var(--base-padding) * 2);
+}
+
+.portfolio-item:hover .background-img {
+    transform: scale(1.05);
+}
+
+.background-img {
+    position: relative;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+} .background-img::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle, var(--vignette-color-start), var(--vignette-color-end)); /* Vignette effect */
+}
+
+.background-img h2, .background-img h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    color: var(--text-color);
+    z-index: 1;
+    font-size: 1.5rem;
+    text-align: center;
+    text-shadow: var(--text-shadow);
+}
+
+.portfolio-item a .main-header {
+    opacity: 100%;
+} .portfolio-item:hover a .main-header {
+    opacity: 0;
+}
+
+.portfolio-item a .secondary-header {
+    opacity: 0;
+} .portfolio-item:hover a .secondary-header {
+    opacity: 100%;
+}
